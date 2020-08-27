@@ -82,6 +82,9 @@ function createEmployee() {
         if(answers.continue) {
             createEmployee();
         }
+        else {
+            render(employeeArr);
+        }
     });
 }
 

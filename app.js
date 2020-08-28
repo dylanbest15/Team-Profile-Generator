@@ -16,31 +16,23 @@ const { push } = require("../../In Class Activities/Week-10/24-Mini-Project/Solv
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 const employeeArr = [];
-let isManager = true;
 
 function createEmployee() {
     inquirer.prompt([
         {
             type: "list",
-            name: "type",
-            message: "Is this employee an Engineer or an Intern?",
+            name: "role",
+            message: "Is this employee a manager, an engineer, or an intern?",
             choices: [
+                "Manager",
                 "Engineer",
-                "Intern",
-            ],
-            when: isManager === false
+                "Intern"
+            ]
         },
         {
             type: "input",
             name: "name",
-            message: "Enter the manager's name.",
-            when: isManager === true
-        },
-        {
-            type: "input",
-            name: "name",
-            message: "Enter the employee's name.",
-            when: isManager === false
+            message: "Enter the employee's name."
         },
         {
             type: "input",
@@ -55,20 +47,20 @@ function createEmployee() {
         {
             type: "input",
             name: "officeNumber",
-            message: "Because this is the manager, enter their office number.",
-            when: isManager === true
+            message: "Because this is a manager, enter their office number.",
+            when: (answers) => answers.role === "Manager"
         },
         {
             type: "input",
             name: "github",
-            message: "Because this is an Engineer, enter their GitHub username.",
-            when: (answers) => answers.type === "Engineer"
+            message: "Because this is an engineer, enter their GitHub username.",
+            when: (answers) => answers.role === "Engineer"
         },
         {
             type: "input",
             name: "school",
-            message: "Because this is an Intern, enter their school.",
-            when: (answers) => answers.type === "Intern"
+            message: "Because this is an intern, enter their school.",
+            when: (answers) => answers.role === "Intern"
         },
         {
             type: "confirm",
@@ -76,14 +68,23 @@ function createEmployee() {
             message: "Do you want to add another employee?"
         }
     ]).then((answers) => {
+
+        
         employeeArr.push(answers);
 
-        isManager = false;
         if(answers.continue) {
             createEmployee();
         }
         else {
-            render(employeeArr);
+            console.log(employeeArr);
+            fs.writeFile("team.html", render(employeeArr), (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log("Successfully wrote to team.html!");
+                }
+            });
         }
     });
 }

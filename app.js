@@ -69,8 +69,17 @@ function createEmployee() {
         }
     ]).then((answers) => {
 
-        
-        employeeArr.push(answers);
+        let Employee = {};
+        if (answers.role === "Manager") {
+            Employee = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+        } 
+        else if (answers.role === "Engineer") {
+            Employee = new Engineer(answers.name, answers.id, answers.email, answers.github);
+        } 
+        else {
+            Employee = new Intern(answers.name, answers.id, answers.email, answers.school);
+        }
+        employeeArr.push(Employee);
 
         if(answers.continue) {
             createEmployee();

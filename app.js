@@ -20,7 +20,7 @@ const employeeArr = [];
 // function to write to team.html
 const writeFilePromise = (text) => {
     return new Promise((resolve, reject) => {
-        fs.writeFile("team.html", text, (err) => {
+        fs.writeFile("./output/team.html", text, (err) => {
             if (err) {
                 return reject(err);
             }
@@ -103,7 +103,7 @@ function createEmployee() {
             const text = render(employeeArr);
             writeFilePromise(text).then((success) => {
                 console.log(success);
-            }).then((err) => {
+            }).catch((err) => {
                 console.log(err);
             })
         }

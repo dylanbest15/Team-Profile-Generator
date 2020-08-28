@@ -17,6 +17,21 @@ const { push } = require("../../In Class Activities/Week-10/24-Mini-Project/Solv
 
 const employeeArr = [];
 
+// function to write to team.html
+const writeFilePromise = (text) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile("team.html", text, (err) => {
+            if (err) {
+                return reject(err);
+            }
+            else {
+                return resolve("Successfully wrote to team.html!");
+            }
+        })
+    })
+}
+
+// function to start inquirer and create employee objects
 function createEmployee() {
     inquirer.prompt([
         {
@@ -85,15 +100,12 @@ function createEmployee() {
             createEmployee();
         }
         else {
-            console.log(employeeArr);
-            fs.writeFile("team.html", render(employeeArr), (err) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    console.log("Successfully wrote to team.html!");
-                }
-            });
+            const text = render(employeeArr);
+            writeFilePromise(text).then((success) => {
+                console.log(success);
+            }).then((err) => {
+                console.log(err);
+            })
         }
     });
 }

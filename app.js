@@ -11,7 +11,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { push } = require("../../In Class Activities/Week-10/24-Mini-Project/Solved/lib/words");
 
 // array variable
 const employeeArr = [];
@@ -19,7 +18,7 @@ const employeeArr = [];
 // function to write to team.html
 const writeFilePromise = (text) => {
     return new Promise((resolve, reject) => {
-        fs.writeFile("./output/team.html", text, (err) => {
+        fs.writeFile(outputPath, text, (err) => {
             if (err) {
                 return reject(err);
             }

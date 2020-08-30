@@ -6,7 +6,9 @@ This application will generate a team profile for the user utilizing Node.js and
 - <a href="https://www.npmjs.com/package/inquirer">Inquirer NPM</a>
 - <a href="https://www.npmjs.com/package/jest">Jest NPM</a>
 
-## Screenshot
+## Screenshots
+![Team-Profile-Generator Node.js](screenshot1-hw8.png)
+![Team-Profile-Generator VS Code](screenshot2-hw8.png)
 
 ## License
 Copyright ©2020 Dylan Best
